@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.xdclass.mapper.ShortLinkMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="net.xdclass.model.ShortLinkDO">
+        <id column="id" property="id" />
+        <result column="group_id" property="groupId" />
+        <result column="title" property="title" />
+        <result column="original_url" property="originalUrl" />
+        <result column="domain" property="domain" />
+        <result column="code" property="code" />
+        <result column="sign" property="sign" />
+        <result column="expired" property="expired" />
+        <result column="account_no" property="accountNo" />
+        <result column="gmt_create" property="gmtCreate" />
+        <result column="gmt_modified" property="gmtModified" />
+        <result column="del" property="del" />
+        <result column="state" property="state" />
+        <result column="link_type" property="linkType" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, group_id, title, original_url, domain, code, sign, expired, account_no, gmt_create, gmt_modified, del, state, link_type
+    </sql>
+
+</mapper>

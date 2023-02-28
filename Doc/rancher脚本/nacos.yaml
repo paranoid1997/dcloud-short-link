@@ -1,0 +1,263 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "5"
+    field.cattle.io/creatorId: user-zl5gh
+    field.cattle.io/publicEndpoints: '[{"addresses":["172.17.186.109"],"port":8848,"protocol":"TCP","serviceName":"midware:nacos-nodeport","allNodes":true}]'
+  creationTimestamp: null
+  generation: 1
+  labels:
+    cattle.io/creator: norman
+    workload.user.cattle.io/workloadselector: deployment-midware-nacos
+  managedFields:
+  - apiVersion: apps/v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:metadata:
+        f:annotations:
+          .: {}
+          f:field.cattle.io/creatorId: {}
+          f:field.cattle.io/publicEndpoints: {}
+        f:labels:
+          .: {}
+          f:cattle.io/creator: {}
+          f:workload.user.cattle.io/workloadselector: {}
+      f:spec:
+        f:progressDeadlineSeconds: {}
+        f:replicas: {}
+        f:revisionHistoryLimit: {}
+        f:selector: {}
+        f:strategy:
+          f:rollingUpdate:
+            .: {}
+            f:maxSurge: {}
+            f:maxUnavailable: {}
+          f:type: {}
+        f:template:
+          f:metadata:
+            f:annotations:
+              .: {}
+              f:cattle.io/timestamp: {}
+              f:field.cattle.io/ports: {}
+              f:field.cattle.io/publicEndpoints: {}
+            f:labels:
+              .: {}
+              f:workload.user.cattle.io/workloadselector: {}
+          f:spec:
+            f:containers:
+              k:{"name":"nacos"}:
+                .: {}
+                f:env:
+                  .: {}
+                  k:{"name":"JVM_XMN"}:
+                    .: {}
+                    f:name: {}
+                    f:value: {}
+                  k:{"name":"JVM_XMS"}:
+                    .: {}
+                    f:name: {}
+                    f:value: {}
+                  k:{"name":"JVM_XMX"}:
+                    .: {}
+                    f:name: {}
+                    f:value: {}
+                  k:{"name":"MODE"}:
+                    .: {}
+                    f:name: {}
+                    f:value: {}
+                  k:{"name":"MYSQL_SERVICE_DB_NAME"}:
+                    .: {}
+                    f:name: {}
+                    f:value: {}
+                  k:{"name":"MYSQL_SERVICE_DB_PARAM"}:
+                    .: {}
+                    f:name: {}
+                    f:value: {}
+                  k:{"name":"MYSQL_SERVICE_HOST"}:
+                    .: {}
+                    f:name: {}
+                    f:value: {}
+                  k:{"name":"MYSQL_SERVICE_PASSWORD"}:
+                    .: {}
+                    f:name: {}
+                    f:value: {}
+                  k:{"name":"MYSQL_SERVICE_PORT"}:
+                    .: {}
+                    f:name: {}
+                    f:value: {}
+                  k:{"name":"MYSQL_SERVICE_USER"}:
+                    .: {}
+                    f:name: {}
+                    f:value: {}
+                  k:{"name":"NACOS_AUTH_ENABLE"}:
+                    .: {}
+                    f:name: {}
+                    f:value: {}
+                  k:{"name":"SPRING_DATASOURCE_PLATFORM"}:
+                    .: {}
+                    f:name: {}
+                    f:value: {}
+                  k:{"name":"tTimeout"}:
+                    .: {}
+                    f:name: {}
+                    f:value: {}
+                f:image: {}
+                f:imagePullPolicy: {}
+                f:name: {}
+                f:ports:
+                  .: {}
+                  k:{"containerPort":8848,"protocol":"TCP"}:
+                    .: {}
+                    f:containerPort: {}
+                    f:name: {}
+                    f:protocol: {}
+                f:resources: {}
+                f:securityContext:
+                  .: {}
+                  f:allowPrivilegeEscalation: {}
+                  f:privileged: {}
+                  f:readOnlyRootFilesystem: {}
+                  f:runAsNonRoot: {}
+                f:stdin: {}
+                f:terminationMessagePath: {}
+                f:terminationMessagePolicy: {}
+                f:tty: {}
+                f:volumeMounts:
+                  .: {}
+                  k:{"mountPath":"/home/nacos/logs"}:
+                    .: {}
+                    f:mountPath: {}
+                    f:name: {}
+            f:dnsPolicy: {}
+            f:restartPolicy: {}
+            f:schedulerName: {}
+            f:securityContext: {}
+            f:terminationGracePeriodSeconds: {}
+            f:volumes:
+              .: {}
+              k:{"name":"nacos-logs"}:
+                .: {}
+                f:hostPath:
+                  .: {}
+                  f:path: {}
+                  f:type: {}
+                f:name: {}
+    manager: rancher
+    operation: Update
+    time: "2023-02-28T08:31:32Z"
+  - apiVersion: apps/v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:metadata:
+        f:annotations:
+          f:deployment.kubernetes.io/revision: {}
+      f:status:
+        f:availableReplicas: {}
+        f:conditions:
+          .: {}
+          k:{"type":"Available"}:
+            .: {}
+            f:lastTransitionTime: {}
+            f:lastUpdateTime: {}
+            f:message: {}
+            f:reason: {}
+            f:status: {}
+            f:type: {}
+          k:{"type":"Progressing"}:
+            .: {}
+            f:lastTransitionTime: {}
+            f:lastUpdateTime: {}
+            f:message: {}
+            f:reason: {}
+            f:status: {}
+            f:type: {}
+        f:observedGeneration: {}
+        f:readyReplicas: {}
+        f:replicas: {}
+        f:updatedReplicas: {}
+    manager: kube-controller-manager
+    operation: Update
+    time: "2023-02-28T09:00:06Z"
+  name: nacos
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      workload.user.cattle.io/workloadselector: deployment-midware-nacos
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+    type: RollingUpdate
+  template:
+    metadata:
+      annotations:
+        cattle.io/timestamp: "2023-02-28T08:59:59Z"
+        field.cattle.io/ports: '[[{"containerPort":8848,"dnsName":"nacos-nodeport","kind":"NodePort","name":"nacos","protocol":"TCP","sourcePort":8848}]]'
+        field.cattle.io/publicEndpoints: '[{"addresses":["172.17.186.109"],"allNodes":true,"port":8848,"protocol":"TCP","serviceId":"midware:nacos-nodeport"}]'
+      creationTimestamp: null
+      labels:
+        workload.user.cattle.io/workloadselector: deployment-midware-nacos
+    spec:
+      containers:
+      - env:
+        - name: JVM_XMN
+          value: 128m
+        - name: JVM_XMS
+          value: 128m
+        - name: JVM_XMX
+          value: 128m
+        - name: MODE
+          value: standalone
+        - name: MYSQL_SERVICE_DB_NAME
+          value: nacos_config
+        - name: MYSQL_SERVICE_DB_PARAM
+          value: characterEncoding=utf8&connec
+        - name: MYSQL_SERVICE_HOST
+          value: 101.200.211.81
+        - name: MYSQL_SERVICE_PASSWORD
+          value: Liu19971009
+        - name: MYSQL_SERVICE_PORT
+          value: "3306"
+        - name: MYSQL_SERVICE_USER
+          value: root
+        - name: NACOS_AUTH_ENABLE
+          value: "true"
+        - name: SPRING_DATASOURCE_PLATFORM
+          value: mysql
+        - name: tTimeout
+          value: 10000&socketTimeout=30000&autoReconnect=true&useSSL=false
+        image: nacos/nacos-server:2.0.2
+        imagePullPolicy: Always
+        name: nacos
+        ports:
+        - containerPort: 8848
+          name: nacos
+          protocol: TCP
+        resources: {}
+        securityContext:
+          allowPrivilegeEscalation: false
+          privileged: false
+          readOnlyRootFilesystem: false
+          runAsNonRoot: false
+        stdin: true
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        tty: true
+        volumeMounts:
+        - mountPath: /home/nacos/logs
+          name: nacos-logs
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - hostPath:
+          path: /home/data/nacos/logs
+          type: DirectoryOrCreate
+        name: nacos-logs
+status: {}

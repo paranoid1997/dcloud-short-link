@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: dcloud-gateway-service
+  cloud:
+    nacos:
+      config:
+        config-long-poll-timeout: 600000
+        enabled: true
+        file-extension: yaml
+        namespace: public
+        password: nacos
+        server-addr: 47.102.124.13:8848
+        username: nacos
+  profiles:
+    active: dev

@@ -1,0 +1,260 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "2"
+    field.cattle.io/creatorId: user-z8b4c
+    field.cattle.io/publicEndpoints: '[{"addresses":["172.18.123.236"],"port":9200,"protocol":"TCP","serviceName":"default:liu-es7-nodeport","allNodes":true},{"addresses":["172.18.123.236"],"port":9300,"protocol":"TCP","serviceName":"default:liu-es7-nodeport","allNodes":true}]'
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{"deployment.kubernetes.io/revision":"1","field.cattle.io/creatorId":"user-z8b4c","field.cattle.io/publicEndpoints":"[{\"addresses\":[\"172.18.123.236\"],\"port\":9200,\"protocol\":\"TCP\",\"serviceName\":\"default:liu-es7-nodeport\",\"allNodes\":true},{\"addresses\":[\"172.18.123.236\"],\"port\":9300,\"protocol\":\"TCP\",\"serviceName\":\"default:liu-es7-nodeport\",\"allNodes\":true}]"},"creationTimestamp":null,"generation":1,"labels":{"cattle.io/creator":"norman","workload.user.cattle.io/workloadselector":"deployment-default-liu-es7"},"managedFields":[{"apiVersion":"apps/v1","fieldsType":"FieldsV1","fieldsV1":{"f:metadata":{"f:annotations":{".":{},"f:field.cattle.io/creatorId":{},"f:field.cattle.io/publicEndpoints":{},"f:kubectl.kubernetes.io/last-applied-configuration":{}},"f:labels":{".":{},"f:cattle.io/creator":{},"f:workload.user.cattle.io/workloadselector":{}}},"f:spec":{"f:progressDeadlineSeconds":{},"f:replicas":{},"f:revisionHistoryLimit":{},"f:selector":{},"f:strategy":{"f:rollingUpdate":{".":{},"f:maxSurge":{},"f:maxUnavailable":{}},"f:type":{}},"f:template":{"f:metadata":{"f:annotations":{".":{},"f:cattle.io/timestamp":{},"f:field.cattle.io/ports":{},"f:workload.cattle.io/state":{}},"f:labels":{".":{},"f:workload.user.cattle.io/workloadselector":{}}},"f:spec":{"f:containers":{"k:{\"name\":\"liu-es7\"}":{".":{},"f:env":{".":{},"k:{\"name\":\"ES_JAVA_OPTS\"}":{".":{},"f:name":{},"f:value":{}},"k:{\"name\":\"discovery.type\"}":{".":{},"f:name":{},"f:value":{}}},"f:image":{},"f:imagePullPolicy":{},"f:name":{},"f:ports":{".":{},"k:{\"containerPort\":9200,\"protocol\":\"TCP\"}":{".":{},"f:containerPort":{},"f:name":{},"f:protocol":{}},"k:{\"containerPort\":9300,\"protocol\":\"TCP\"}":{".":{},"f:containerPort":{},"f:name":{},"f:protocol":{}}},"f:resources":{},"f:securityContext":{".":{},"f:allowPrivilegeEscalation":{},"f:capabilities":{},"f:privileged":{},"f:readOnlyRootFilesystem":{},"f:runAsNonRoot":{}},"f:stdin":{},"f:terminationMessagePath":{},"f:terminationMessagePolicy":{},"f:tty":{},"f:volumeMounts":{".":{},"k:{\"mountPath\":\"/usr/share/elasticsearch/config/elasticsearch.yml\"}":{".":{},"f:mountPath":{},"f:name":{},"f:subPath":{}},"k:{\"mountPath\":\"/usr/share/elasticsearch/data\"}":{".":{},"f:mountPath":{},"f:name":{}},"k:{\"mountPath\":\"/usr/share/elasticsearch/plugins\"}":{".":{},"f:mountPath":{},"f:name":{}}}}},"f:dnsPolicy":{},"f:nodeName":{},"f:restartPolicy":{},"f:schedulerName":{},"f:securityContext":{},"f:terminationGracePeriodSeconds":{},"f:volumes":{".":{},"k:{\"name\":\"es-data\"}":{".":{},"f:hostPath":{".":{},"f:path":{},"f:type":{}},"f:name":{}},"k:{\"name\":\"es-plugins\"}":{".":{},"f:hostPath":{".":{},"f:path":{},"f:type":{}},"f:name":{}},"k:{\"name\":\"xd-es\"}":{".":{},"f:configMap":{".":{},"f:defaultMode":{},"f:name":{},"f:optional":{}},"f:name":{}}}}}}},"manager":"kubectl-client-side-apply","operation":"Update","time":"2022-04-12T06:20:23Z"},{"apiVersion":"apps/v1","fieldsType":"FieldsV1","fieldsV1":{"f:metadata":{"f:annotations":{"f:deployment.kubernetes.io/revision":{}}},"f:status":{"f:availableReplicas":{},"f:conditions":{".":{},"k:{\"type\":\"Available\"}":{".":{},"f:lastTransitionTime":{},"f:lastUpdateTime":{},"f:message":{},"f:reason":{},"f:status":{},"f:type":{}},"k:{\"type\":\"Progressing\"}":{".":{},"f:lastTransitionTime":{},"f:lastUpdateTime":{},"f:message":{},"f:reason":{},"f:status":{},"f:type":{}}},"f:observedGeneration":{},"f:readyReplicas":{},"f:replicas":{},"f:updatedReplicas":{}}},"manager":"kube-controller-manager","operation":"Update","time":"2022-04-12T06:20:27Z"}],"name":"liu-es7","namespace":"default"},"spec":{"progressDeadlineSeconds":600,"replicas":1,"revisionHistoryLimit":10,"selector":{"matchLabels":{"workload.user.cattle.io/workloadselector":"deployment-default-liu-es7"}},"strategy":{"rollingUpdate":{"maxSurge":1,"maxUnavailable":0},"type":"RollingUpdate"},"template":{"metadata":{"annotations":{"cattle.io/timestamp":"2022-04-12T05:19:04Z","field.cattle.io/ports":"[[{\"containerPort\":9200,\"dnsName\":\"liu-es7-nodeport\",\"hostPort\":0,\"kind\":\"NodePort\",\"name\":\"9200tcp92001\",\"protocol\":\"TCP\",\"sourcePort\":9200},{\"containerPort\":9300,\"dnsName\":\"liu-es7-nodeport\",\"hostPort\":0,\"kind\":\"NodePort\",\"name\":\"9300tcp93001\",\"protocol\":\"TCP\",\"sourcePort\":9300}]]","workload.cattle.io/state":"{\"\":\"c-fh95p:m-90a323cc4bdc\",\"aXp3ejkwcGVndTlidWR4NXRrNHJ1eno=\":\"c-fh95p:m-90a323cc4bdc\",\"aXp3ejlmM3B2azRreDVoYW5yc2xxaHo=\":\"c-9kkcj:m-173ea115b6eb\"}"},"creationTimestamp":null,"labels":{"workload.user.cattle.io/workloadselector":"deployment-default-liu-es7"}},"spec":{"containers":[{"env":[{"name":"ES_JAVA_OPTS","value":"-Xms128m -Xmx128m"},{"name":"discovery.type","value":"single-node"}],"image":"elasticsearch:7.6.2","imagePullPolicy":"Always","name":"liu-es7","ports":[{"containerPort":9200,"name":"9200tcp92001","protocol":"TCP"},{"containerPort":9300,"name":"9300tcp93001","protocol":"TCP"}],"resources":{},"securityContext":{"allowPrivilegeEscalation":false,"capabilities":{},"privileged":false,"readOnlyRootFilesystem":false,"runAsNonRoot":false},"stdin":true,"terminationMessagePath":"/dev/termination-log","terminationMessagePolicy":"File","tty":true,"volumeMounts":[{"mountPath":"/usr/share/elasticsearch/config/elasticsearch.yml","name":"xd-es","subPath":"elasticsearch.yml"},{"mountPath":"/usr/share/elasticsearch/data","name":"es-data"},{"mountPath":"/usr/share/elasticsearch/plugins","name":"es-plugins"}]}],"dnsPolicy":"ClusterFirst","nodeName":"izwz9f3pvk4kx5hanrslqhz","restartPolicy":"Always","schedulerName":"default-scheduler","securityContext":{},"terminationGracePeriodSeconds":30,"volumes":[{"configMap":{"defaultMode":511,"name":"elasticsearch.yml","optional":false},"name":"xd-es"},{"hostPath":{"path":"/mydata/es/data","type":"DirectoryOrCreate"},"name":"es-data"},{"hostPath":{"path":"/mydata/es/plugins","type":"DirectoryOrCreate"},"name":"es-plugins"}]}}},"status":{}}
+  creationTimestamp: null
+  generation: 1
+  labels:
+    cattle.io/creator: norman
+    workload.user.cattle.io/workloadselector: deployment-default-liu-es7
+  managedFields:
+  - apiVersion: apps/v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:metadata:
+        f:annotations:
+          .: {}
+          f:field.cattle.io/creatorId: {}
+          f:field.cattle.io/publicEndpoints: {}
+          f:kubectl.kubernetes.io/last-applied-configuration: {}
+        f:labels:
+          .: {}
+          f:cattle.io/creator: {}
+          f:workload.user.cattle.io/workloadselector: {}
+      f:spec:
+        f:progressDeadlineSeconds: {}
+        f:replicas: {}
+        f:revisionHistoryLimit: {}
+        f:selector: {}
+        f:strategy:
+          f:rollingUpdate:
+            .: {}
+            f:maxSurge: {}
+            f:maxUnavailable: {}
+          f:type: {}
+        f:template:
+          f:metadata:
+            f:annotations:
+              .: {}
+              f:workload.cattle.io/state: {}
+            f:labels:
+              .: {}
+              f:workload.user.cattle.io/workloadselector: {}
+          f:spec:
+            f:containers:
+              k:{"name":"liu-es7"}:
+                .: {}
+                f:env:
+                  .: {}
+                  k:{"name":"ES_JAVA_OPTS"}:
+                    .: {}
+                    f:name: {}
+                    f:value: {}
+                  k:{"name":"discovery.type"}:
+                    .: {}
+                    f:name: {}
+                    f:value: {}
+                f:image: {}
+                f:imagePullPolicy: {}
+                f:name: {}
+                f:ports:
+                  .: {}
+                  k:{"containerPort":9200,"protocol":"TCP"}:
+                    .: {}
+                    f:containerPort: {}
+                    f:name: {}
+                    f:protocol: {}
+                  k:{"containerPort":9300,"protocol":"TCP"}:
+                    .: {}
+                    f:containerPort: {}
+                    f:name: {}
+                    f:protocol: {}
+                f:resources: {}
+                f:securityContext:
+                  .: {}
+                  f:allowPrivilegeEscalation: {}
+                  f:privileged: {}
+                  f:readOnlyRootFilesystem: {}
+                  f:runAsNonRoot: {}
+                f:stdin: {}
+                f:terminationMessagePath: {}
+                f:terminationMessagePolicy: {}
+                f:tty: {}
+                f:volumeMounts:
+                  .: {}
+                  k:{"mountPath":"/usr/share/elasticsearch/config/elasticsearch.yml"}:
+                    .: {}
+                    f:mountPath: {}
+                    f:name: {}
+                    f:subPath: {}
+                  k:{"mountPath":"/usr/share/elasticsearch/data"}:
+                    .: {}
+                    f:mountPath: {}
+                    f:name: {}
+                  k:{"mountPath":"/usr/share/elasticsearch/plugins"}:
+                    .: {}
+                    f:mountPath: {}
+                    f:name: {}
+            f:dnsPolicy: {}
+            f:nodeName: {}
+            f:restartPolicy: {}
+            f:schedulerName: {}
+            f:securityContext: {}
+            f:terminationGracePeriodSeconds: {}
+            f:volumes:
+              .: {}
+              k:{"name":"es-data"}:
+                .: {}
+                f:hostPath:
+                  .: {}
+                  f:path: {}
+                  f:type: {}
+                f:name: {}
+              k:{"name":"es-plugins"}:
+                .: {}
+                f:hostPath:
+                  .: {}
+                  f:path: {}
+                  f:type: {}
+                f:name: {}
+              k:{"name":"xd-es"}:
+                .: {}
+                f:configMap:
+                  .: {}
+                  f:defaultMode: {}
+                  f:name: {}
+                  f:optional: {}
+                f:name: {}
+    manager: kubectl-client-side-apply
+    operation: Update
+    time: "2022-04-12T10:04:00Z"
+  - apiVersion: apps/v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:spec:
+        f:template:
+          f:metadata:
+            f:annotations:
+              f:cattle.io/timestamp: {}
+              f:field.cattle.io/ports: {}
+              f:field.cattle.io/publicEndpoints: {}
+    manager: rancher
+    operation: Update
+    time: "2022-04-12T10:05:12Z"
+  - apiVersion: apps/v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:metadata:
+        f:annotations:
+          f:deployment.kubernetes.io/revision: {}
+      f:status:
+        f:availableReplicas: {}
+        f:conditions:
+          .: {}
+          k:{"type":"Available"}:
+            .: {}
+            f:lastTransitionTime: {}
+            f:lastUpdateTime: {}
+            f:message: {}
+            f:reason: {}
+            f:status: {}
+            f:type: {}
+          k:{"type":"Progressing"}:
+            .: {}
+            f:lastTransitionTime: {}
+            f:lastUpdateTime: {}
+            f:message: {}
+            f:reason: {}
+            f:status: {}
+            f:type: {}
+        f:observedGeneration: {}
+        f:readyReplicas: {}
+        f:replicas: {}
+        f:updatedReplicas: {}
+    manager: kube-controller-manager
+    operation: Update
+    time: "2022-04-12T10:05:19Z"
+  name: liu-es7
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      workload.user.cattle.io/workloadselector: deployment-default-liu-es7
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+    type: RollingUpdate
+  template:
+    metadata:
+      annotations:
+        cattle.io/timestamp: "2022-04-12T10:05:12Z"
+        field.cattle.io/ports: '[[{"containerPort":9200,"dnsName":"liu-es7-nodeport","kind":"NodePort","name":"9200tcp92001","protocol":"TCP","sourcePort":9200},{"containerPort":9300,"dnsName":"liu-es7-nodeport","kind":"NodePort","name":"9300tcp93001","protocol":"TCP","sourcePort":9300}]]'
+        field.cattle.io/publicEndpoints: '[{"addresses":["172.18.123.236"],"allNodes":true,"port":9200,"protocol":"TCP","serviceId":"default:liu-es7-nodeport"},{"addresses":["172.18.123.236"],"allNodes":true,"port":9300,"protocol":"TCP","serviceId":"default:liu-es7-nodeport"}]'
+        workload.cattle.io/state: '{"":"c-fh95p:m-90a323cc4bdc","aXp3ejkwcGVndTlidWR4NXRrNHJ1eno=":"c-fh95p:m-90a323cc4bdc","aXp3ejlmM3B2azRreDVoYW5yc2xxaHo=":"c-9kkcj:m-173ea115b6eb"}'
+      creationTimestamp: null
+      labels:
+        workload.user.cattle.io/workloadselector: deployment-default-liu-es7
+    spec:
+      containers:
+      - env:
+        - name: ES_JAVA_OPTS
+          value: -Xms128m -Xmx128m
+        - name: discovery.type
+          value: single-node
+        image: elasticsearch:7.6.2
+        imagePullPolicy: Always
+        name: liu-es7
+        ports:
+        - containerPort: 9200
+          name: 9200tcp92001
+          protocol: TCP
+        - containerPort: 9300
+          name: 9300tcp93001
+          protocol: TCP
+        resources: {}
+        securityContext:
+          allowPrivilegeEscalation: false
+          privileged: false
+          readOnlyRootFilesystem: false
+          runAsNonRoot: false
+        stdin: true
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        tty: true
+        volumeMounts:
+        - mountPath: /usr/share/elasticsearch/config/elasticsearch.yml
+          name: xd-es
+          subPath: elasticsearch.yml
+        - mountPath: /usr/share/elasticsearch/data
+          name: es-data
+        - mountPath: /usr/share/elasticsearch/plugins
+          name: es-plugins
+      dnsPolicy: ClusterFirst
+      nodeName: izwz9f3pvk4kx5hanrslqhz
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - configMap:
+          defaultMode: 511
+          name: elasticsearch.yml
+          optional: false
+        name: xd-es
+      - hostPath:
+          path: /mydata/es/data
+          type: DirectoryOrCreate
+        name: es-data
+      - hostPath:
+          path: /mydata/es/plugins
+          type: DirectoryOrCreate
+        name: es-plugins
+status: {}

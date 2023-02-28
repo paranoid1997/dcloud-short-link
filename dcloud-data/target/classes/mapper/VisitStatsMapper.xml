@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.xdclass.mapper.VisitStatsMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="net.xdclass.model.VisitStatsDO">
+        <result column="code" property="code"/>
+        <result column="referer" property="referer"/>
+        <result column="is_new" property="isNew"/>
+        <result column="account_no" property="accountNo"/>
+        <result column="ts" property="visitTime"/>
+
+        <result column="province" property="province"/>
+        <result column="city" property="city"/>
+        <result column="ip" property="ip"/>
+
+        <result column="browser_name" property="browserName"/>
+        <result column="os" property="os"/>
+        <result column="device_type" property="deviceType"/>
+
+        <result column="start_time" property="startTime"/>
+        <result column="uv_count" property="uvCount"/>
+        <result column="pv_count" property="pvCount"/>
+
+        <result column="ip_count" property="ipCount"/>
+        <result column="new_uv_count" property="newUVCount"/>
+        <result column="date_time_str" property="dateTimeStr"/>
+
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+       code,referer,ts,is_new,account_no,province,city,ip,browser_name,os,device_type,start_time
+    </sql>
+
+
+    <!--统计总条数-->
+    <select id="countTotal" resultType="java.lang.Integer">
+        select count(1) from visit_stats  where  account_no=#{accountNo} and code=#{code} limit 1000
+    </select>
+
+
+    <!--分页查找-->
+    <select id="pageVisitRecord" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from visit_stats where account_no=#{accountNo} and code=#{code}
+        order by ts desc limit #{from},#{size}
+    </select>
+
+
+
+    <!--时间范围内地区访问分布-城市级别，天级别-->
+    <select id="queryRegionVisitStatsWithDay" resultMap="BaseResultMap">
+        select province,city,sum(pv) pv_count,sum(uv) uv_count,count( DISTINCT ip) ip_count from visit_stats
+        where  account_no=#{accountNo} and code=#{code} and toYYYYMMDD(start_time) BETWEEN #{startTime} and #{endTime}
+        group by province,city order by pv_count desc
+    </select>
+
+
+
+    <!-- 多天内的访问曲线图,天基本 -->
+    <select id="queryVisitTrendWithMultiDay" resultMap="BaseResultMap">
+        select toYYYYMMDD(start_time) date_time_str,sum(if(is_new='1', visit_stats.uv,0)) new_uv_count,
+        sum(visit_stats.uv) uv_count, sum(pv) pv_count, count( DISTINCT ip) ip_count from visit_stats
+        where account_no=#{accountNo} and code=#{code} and toYYYYMMDD(start_time) BETWEEN #{startTime}
+        and #{endTime} group by date_time_str ORDER BY date_time_str desc
+</select>
+
+
+
+    <!-- 一天内的访问曲线图,小时 -->
+    <select id="queryVisitTrendWithHour" resultMap="BaseResultMap">
+        select toHour(start_time) date_time_str,sum(if(is_new='1', visit_stats.uv,0)) new_uv_count,
+        sum(visit_stats.uv) uv_count, sum(pv) pv_count, count( DISTINCT ip) ip_count from visit_stats
+        where  account_no=#{accountNo} and code=#{code} and toYYYYMMDD(start_time)=#{startTime}
+        group by date_time_str ORDER BY date_time_str desc
+    </select>
+
+
+
+
+    <!-- 小时内的访问曲线图,每分钟，如果要每5分钟，则把 toMinute 改为 toStartOfFiveMinute -->
+    <select id="queryVisitTrendWithMinute" resultMap="BaseResultMap">
+        select toMinute(start_time) date_time_str,sum(if(is_new='1', visit_stats.uv,0)) new_uv_count,
+        sum(visit_stats.uv) uv_count, sum(pv) pv_count, count( DISTINCT ip) ip_count from visit_stats
+        where account_no=#{accountNo} and code=#{code} and toYYYYMMDDhhmmss(start_time) BETWEEN #{startTime}
+        and #{endTime}
+        group by date_time_str ORDER BY date_time_str desc
+    </select>
+
+
+    <!--高频referer查询 访问来源-->
+    <select id="queryFrequentSource" resultMap="BaseResultMap">
+    select referer,sum(pv) pv_count from visit_stats where
+    account_no=#{accountNo} and code=#{code} and toYYYYMMDD(start_time) BETWEEN #{startTime} and #{endTime}
+    group by referer  order by pv_count desc limit #{size}
+    </select>
+
+
+
+
+    <!--查询设备信息分布情况-->
+    <select id="queryDeviceInfo" resultMap="BaseResultMap">
+        <if test=" field=='os'">
+            select os,sum(pv) pv_count from visit_stats where account_no=#{accountNo}
+            and code=#{code} and toYYYYMMDD(start_time) BETWEEN #{startTime} and #{endTime}
+            group by os order by pv_count
+        </if>
+        <if test=" field=='browser'">
+            select browser_name,sum(pv) pv_count from visit_stats where account_no=#{accountNo}
+             and code=#{code} and toYYYYMMDD(start_time) BETWEEN #{startTime} and #{endTime}
+            group by browser_name order by pv_count
+        </if>
+        <if test=" field=='device'">
+            select device_type,sum(pv) pv_count from visit_stats where account_no=#{accountNo}
+             and code=#{code} and toYYYYMMDD(start_time) BETWEEN #{startTime} and #{endTime}
+            group by device_type order by pv_count
+        </if>
+    </select>
+</mapper>

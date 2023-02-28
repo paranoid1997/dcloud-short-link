@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.xdclass.mapper.ProductMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="net.xdclass.model.ProductDO">
+        <id column="id" property="id" />
+        <result column="title" property="title" />
+        <result column="detail" property="detail" />
+        <result column="img" property="img" />
+        <result column="level" property="level" />
+        <result column="old_amount" property="oldAmount" />
+        <result column="amount" property="amount" />
+        <result column="plugin_type" property="pluginType" />
+        <result column="day_times" property="dayTimes" />
+        <result column="total_times" property="totalTimes" />
+        <result column="valid_day" property="validDay" />
+        <result column="gmt_modified" property="gmtModified" />
+        <result column="gmt_create" property="gmtCreate" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, title, detail, img, level, old_amount, amount, plugin_type, day_times, total_times, valid_day, gmt_modified, gmt_create
+    </sql>
+
+</mapper>
