@@ -50,4 +50,18 @@ public class AccountManagerImpl implements AccountManager {
                 (new QueryWrapper<AccountDO>().eq("phone", phone));
         return accountDOList;
     }
+
+
+    /**
+     * 查看个人信息
+     * @param accountNo
+     * @return
+     */
+    @Override
+    public AccountDO detail(long accountNo) {
+        AccountDO accountDO = accountMapper.selectOne(new QueryWrapper<AccountDO>()
+                .eq("account_no", accountNo));
+        return accountDO;
+
+    }
 }

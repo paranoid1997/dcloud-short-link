@@ -8,6 +8,7 @@ import net.xdclass.enums.AuthTypeEnum;
 import net.xdclass.enums.BizCodeEnum;
 import net.xdclass.enums.EventMessageType;
 import net.xdclass.enums.SendCodeEnum;
+import net.xdclass.interceptor.LoginInterceptor;
 import net.xdclass.manager.AccountManager;
 import net.xdclass.model.AccountDO;
 import net.xdclass.mapper.AccountMapper;
@@ -20,6 +21,7 @@ import net.xdclass.util.CommonUtil;
 import net.xdclass.util.IDUtil;
 import net.xdclass.util.JWTUtil;
 import net.xdclass.util.JsonData;
+import net.xdclass.vo.AccountVO;
 import org.apache.commons.codec.digest.Md5Crypt;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -121,6 +123,23 @@ public class AccountServiceImpl implements AccountService {
             return JsonData.buildResult(BizCodeEnum.ACCOUNT_UNREGISTER);
         }
     }
+
+
+
+    /**
+     * 查询个人信息
+     * @return
+     */
+    @Override
+    public JsonData detail() {
+        LoginUser loginUser = LoginInterceptor.threadLocal.get();
+        AccountDO accountDO = accountManager.detail(loginUser.getAccountNo());
+        AccountVO accountVO = new AccountVO();
+        BeanUtils.copyProperties(accountDO,accountVO);
+        return JsonData.buildSuccess(accountVO);
+    }
+
+
 
     /**
      * 用户初始化福利，流量包

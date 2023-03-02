@@ -1,0 +1,70 @@
+server:
+  port: 80
+
+
+#应用名称
+spring:
+  application:
+    name: dcloud-gateway
+
+  #服务注册发现
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 47.102.124.13:8848
+        username: nacos
+        password: nacos
+
+
+    gateway:
+      routes: #数组形式
+        - id: dcloud-link-api-service  #数据服务 路由唯一标识
+          uri: lb://dcloud-link-service  #从nocas进行转发
+          order: 1 #优先级，数字越小优先级越高
+          predicates: #断言 配置哪个路径才转发，前端访问路径统一加上XXX-server，网关判断转发对应的服务，如果是回调业务记得修改
+            - Path=/* #匹配一个路径,用于短链解析
+
+        - id: dcloud-link-service  #数据服务 路由唯一标识
+          uri: lb://dcloud-link-service  #从nocas进行转发
+          order: 2 #优先级，数字越小优先级越高
+          predicates: #断言 配置哪个路径才转发，前端访问路径统一加上XXX-server，网关判断转发对应的服务，如果是回调业务记得修改
+            - Path=/link-server/**
+          filters: #过滤器，请求在传递过程中通过过滤器修改
+            - StripPrefix=1  #去掉第一层前缀，转发给后续的路径
+
+        - id: dcloud-data-service  #数据服务 路由唯一标识
+          uri: lb://dcloud-data-service  #从nocas进行转发
+          order: 3 #优先级，数字越小优先级越高
+          predicates: #断言 配置哪个路径才转发，前端访问路径统一加上XXX-server，网关判断转发对应的服务，如果是回调业务记得修改
+            - Path=/data-server/**
+          filters: #过滤器，请求在传递过程中通过过滤器修改
+            - StripPrefix=1  #去掉第一层前缀，转发给后续的路径
+
+        - id: dcloud-account-service  #用户服务 路由唯一标识
+          uri: lb://dcloud-account-service  #从nocas进行转发
+          order: 4 #优先级，数字越小优先级越高
+          predicates: #断言 配置哪个路径才转发，前端访问路径统一加上XXX-server，网关判断转发对应的服务，如果是回调业务记得修改
+            - Path=/account-server/**
+          filters: #过滤器，请求在传递过程中通过过滤器修改
+            - StripPrefix=1  #去掉第一层前缀，转发给后续的路径
+
+        - id: dcloud-shop-service  #用户服务 路由唯一标识
+          uri: lb://dcloud-shop-service  #从nocas进行转发
+          order: 5 #优先级，数字越小优先级越高
+          predicates: #断言 配置哪个路径才转发，前端访问路径统一加上XXX-server，网关判断转发对应的服务，如果是回调业务记得修改
+            - Path=/shop-server/**
+          filters: #过滤器，请求在传递过程中通过过滤器修改
+            - StripPrefix=1  #去掉第一层前缀，转发给后续的路径
+
+
+      #开启网关拉取nacos的服务
+      discovery:
+        locator:
+          enabled: true
+
+#设置日志级别,ERROR/WARN/INFO/DEBUG,默认是INFO以上才显示
+logging:
+  level:
+    root: INFO
+    #nacos日志问题
+    com.alibaba.nacos.client.config.impl: WARN

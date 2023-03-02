@@ -8,6 +8,7 @@ import net.xdclass.util.DeviceUtil;
 import net.xdclass.util.KafkaUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.flink.api.common.functions.FlatMapFunction;
+import org.apache.flink.api.common.restartstrategy.RestartStrategies;
 import org.apache.flink.api.java.functions.KeySelector;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.datastream.DataStreamSource;
@@ -49,7 +50,7 @@ public class DwdShortLinkLogApp {
 
     public static void main(String [] args) throws Exception {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
-        env.setParallelism(1);
+        //env.setParallelism(1);
         //DataStream<String> ds =  env.socketTextStream("10.0.0.67",8888);
        FlinkKafkaConsumer<String> kafkaConsumer = KafkaUtil.getKafkaConsumer(SOURCE_TOPIC, GROUP_ID);
         DataStreamSource<String> ds = env.addSource(kafkaConsumer);

@@ -9,6 +9,7 @@ import net.xdclass.util.TimeUtil;
 import org.apache.flink.api.common.eventtime.WatermarkStrategy;
 import org.apache.flink.api.common.functions.MapFunction;
 import org.apache.flink.api.common.functions.ReduceFunction;
+import org.apache.flink.api.common.restartstrategy.RestartStrategies;
 import org.apache.flink.api.java.functions.KeySelector;
 import org.apache.flink.api.java.tuple.Tuple9;
 import org.apache.flink.streaming.api.datastream.*;
@@ -49,8 +50,7 @@ public class DwsShortLinkVisitStatsApp {
 
     public static void main(String[] args) throws Exception {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
-        env.setParallelism(1);
-
+        //env.setParallelism(1);
         //1、获取多个数据
         FlinkKafkaConsumer<String> shortLinkSource = KafkaUtil.getKafkaConsumer
                 (SHORT_LINK_SOURCE_TOPIC,SHORT_LINK_SOURCE_GROUP);

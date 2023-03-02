@@ -24,4 +24,12 @@ public interface AccountManager {
      * @return
      */
     List<AccountDO> findByPhone(String phone);
+
+
+    /**
+     * 查看个人信息
+     * @param accountNo
+     * @return
+     */
+    AccountDO detail(long accountNo);
 }

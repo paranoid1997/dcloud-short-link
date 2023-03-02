@@ -96,12 +96,14 @@ public class ProductOrderManagerImpl implements ProductOrderManager {
             orderDOIPage = productOrderMapper.selectPage(pageInfo,
                     new QueryWrapper<ProductOrderDO>()
                             .eq("account_no", accountNo)
-                            .eq("del",0));
+                            .eq("del",0)
+                            .orderByDesc("gmt_create"));
         } else {
             orderDOIPage = productOrderMapper.selectPage(pageInfo, new QueryWrapper<ProductOrderDO>()
                     .eq("account_no", accountNo)
                     .eq("state", state)
-                    .eq("del",0));
+                    .eq("del",0)
+                    .orderByDesc("gmt_create"));
         }
         List<ProductOrderDO> orderDOIPageRecords = orderDOIPage.getRecords();
         List<ProductOrderVO> productOrderVOList = orderDOIPageRecords.stream().map(obj -> {

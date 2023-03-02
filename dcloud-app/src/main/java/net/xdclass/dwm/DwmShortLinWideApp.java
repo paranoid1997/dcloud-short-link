@@ -5,6 +5,7 @@ import net.xdclass.func.DeviceMapFunction;
 import net.xdclass.func.LocationMapFunction;
 import net.xdclass.model.ShortLinkWideDO;
 import net.xdclass.util.KafkaUtil;
+import org.apache.flink.api.common.restartstrategy.RestartStrategies;
 import org.apache.flink.streaming.api.datastream.AsyncDataStream;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.datastream.DataStreamSource;
@@ -42,7 +43,7 @@ public class DwmShortLinWideApp {
 
     public static void main(String [] args) throws Exception {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
-        env.setParallelism(1);
+        //env.setParallelism(1);
         //DataStream<String> ds =  env.socketTextStream("10.0.0.67",8888);
         // 1、获取流
         FlinkKafkaConsumer<String> kafkaConsumer = KafkaUtil.getKafkaConsumer(SOURCE_TOPIC, GROUP_ID);

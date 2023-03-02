@@ -60,4 +60,15 @@ public class AccountController {
         JsonData jsonData = accountService.login(request);
         return jsonData;
     }
+
+
+    /**
+     * 查询个人信息
+     * @return
+     */
+    @GetMapping("detail")
+    public JsonData detail(){
+        JsonData jsonData = accountService.detail();
+        return jsonData;
+    }
 }

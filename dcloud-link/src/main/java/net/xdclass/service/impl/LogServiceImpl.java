@@ -55,14 +55,14 @@ public class LogServiceImpl implements LogService {
     @Override
     public void recordShortLinkLog(HttpServletRequest request, String shortLinkCode, Long accountNo) {
         //ip、浏览器信息
-        //String ip = CommonUtil.getIpAddr(request);
-        String ip = ipList.get(random.nextInt(ipList.size()));
+        String ip = CommonUtil.getIpAddr(request);
+        //String ip = ipList.get(random.nextInt(ipList.size()));
         //全部请求头
         Map<String,String> headerMap = CommonUtil.getAllRequestHeader(request);
         Map<String,String> availableMap = new HashMap<>();
         availableMap.put("user-agent",headerMap.get("user-agent"));
-        //availableMap.put("referer",headerMap.get("referer"));
-        availableMap.put("referer",refererList.get(random.nextInt(refererList.size())));
+        availableMap.put("referer",headerMap.get("referer"));
+       // availableMap.put("referer",refererList.get(random.nextInt(refererList.size())));
         availableMap.put("accountNo",accountNo.toString());
         LogRecord logRecord = LogRecord.builder()
                 //日志类型

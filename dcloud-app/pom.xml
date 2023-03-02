@@ -177,9 +177,8 @@
     </repositories>
 
     <build>
-        <finalName>xdclass-flink</finalName>
+        <finalName>liu-flink</finalName>
         <plugins>
-
             <!--默认编译版本比较低，所以用compiler插件,指定项目源码的jdk版本，编译后的jdk版本和编码,-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

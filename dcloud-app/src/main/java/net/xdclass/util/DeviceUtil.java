@@ -130,13 +130,17 @@ public class DeviceUtil {
         if(StringUtils.isBlank(userAgent)) {
             return osVersion;
         }
-        String[] strArr = userAgent.substring(userAgent.indexOf("(")+1,
-                userAgent.indexOf(")")).split(";");
-        if(null == strArr || strArr.length == 0) {
+        if(userAgent.indexOf("(")>=0 && userAgent.indexOf(")")>=0){
+            String[] strArr = userAgent.substring(userAgent.indexOf("(")+1,
+                    userAgent.indexOf(")")).split(";");
+            if(null == strArr || strArr.length == 0) {
+                return osVersion;
+            }
+            osVersion = strArr[1];
             return osVersion;
         }
-        osVersion = strArr[1];
-        return osVersion;
+        return "";
+
     }
 
 

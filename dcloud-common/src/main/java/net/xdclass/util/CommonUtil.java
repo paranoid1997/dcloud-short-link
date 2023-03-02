@@ -12,6 +12,12 @@ import java.net.UnknownHostException;
 import java.security.MessageDigest;
 import java.util.*;
 
+/**
+ * @Description
+ * @Author 刘森飚
+
+ **/
+
 
 @Slf4j
 public class CommonUtil {

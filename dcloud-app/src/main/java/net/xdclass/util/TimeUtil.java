@@ -7,7 +7,7 @@ import java.util.Date;
 
 /**
  * @author 刘森飚
- * @since 2023-02-17
+ * @since 2023-02-03
  */
 
 public class TimeUtil {
@@ -18,7 +18,7 @@ public class TimeUtil {
      */
     private static final String DEFAULT_PATTERN = "yyyy-MM-dd";
 
-    private static final String DEFAULT_PATTERN_WITH_TIME = "yyyy-MM-dd hh:mm:ss";
+    private static final String DEFAULT_PATTERN_WITH_TIME = "yyyy-MM-dd HH:mm:ss";
 
     /**
      * 默认日期格式
@@ -76,6 +76,7 @@ public class TimeUtil {
      * @return
      */
     public static String format(Long timestamp){
+
         String timeStr = DEFAULT_DATE_FORMATTER.format(new Date(timestamp).toInstant().atZone(DEFAULT_ZONE_ID));
         return timeStr;
     }
@@ -96,11 +97,13 @@ public class TimeUtil {
 
     /**
      * 字符串 转 Date
+     *
      * @param time
      * @return
      */
     public static Date strToDate(String time) {
         LocalDateTime localDateTime = LocalDateTime.parse(time, DEFAULT_DATE_FORMATTER);
         return Date.from(localDateTime.atZone(DEFAULT_ZONE_ID).toInstant());
+
     }
 }

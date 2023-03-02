@@ -187,8 +187,8 @@ public class ProductOrderServiceImpl implements ProductOrderService {
             payInfoVO.setOutTradeNo(outTradeNo);
             payInfoVO.setAccountNo(accountNo);
 
-            //TODO 需要向第三方支付平台查询状态
-            String payResult = "";
+            //需要向第三方支付平台查询状态
+            String payResult = payFactory.queryPayStatus(payInfoVO);
             if (StringUtils.isBlank(payResult)) {
                 //如果为空，则未支付成功，本地取消订单
                 productOrderManager.updateOrderPayState(outTradeNo, accountNo,
@@ -199,7 +199,28 @@ public class ProductOrderServiceImpl implements ProductOrderService {
                 log.warn("支付成功，但是微信回调通知失败，需要排查问题:{}", eventMessage);
                 productOrderManager.updateOrderPayState(outTradeNo, accountNo,
                         ProductOrderStateEnum.PAY.name(), ProductOrderStateEnum.NEW.name());
-                //触发支付成功后的逻辑， TODO
+                //触发支付成功后的逻辑
+                Map<String, Object> content = new HashMap<>(4);
+                content.put("outTradeNo", outTradeNo);
+                content.put("buyNum", productOrderDO.getBuyNum());
+                content.put("accountNo", accountNo);
+                content.put("product", productOrderDO.getProductSnapshot());
+                //构建消息
+                EventMessage payEventMessage = EventMessage.builder()
+                        .bizId(outTradeNo)
+                        .accountNo(accountNo)
+                        .messageId(outTradeNo)
+                        .content(JsonUtil.obj2Json(content))
+                        .eventMessageType(EventMessageType.PRODUCT_ORDER_PAY.name())
+                        .build();
+
+                Boolean flag = redisTemplate.opsForValue()
+                        .setIfAbsent(outTradeNo, "OK", 3, TimeUnit.DAYS);
+                if (flag) {
+                    rabbitTemplate.convertAndSend(rabbitMQConfig.getOrderEventExchange(),
+                            rabbitMQConfig.getOrderUpdateTrafficRoutingKey(), payEventMessage);
+                    return false;
+                }
             }
         }
         return true;

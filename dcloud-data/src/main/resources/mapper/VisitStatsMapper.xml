@@ -64,7 +64,7 @@
         select toYYYYMMDD(start_time) date_time_str,sum(if(is_new='1', visit_stats.uv,0)) new_uv_count,
         sum(visit_stats.uv) uv_count, sum(pv) pv_count, count( DISTINCT ip) ip_count from visit_stats
         where account_no=#{accountNo} and code=#{code} and toYYYYMMDD(start_time) BETWEEN #{startTime}
-        and #{endTime} group by date_time_str ORDER BY date_time_str desc
+        and #{endTime} group by date_time_str ORDER BY date_time_str asc
 </select>
 
 
@@ -74,7 +74,7 @@
         select toHour(start_time) date_time_str,sum(if(is_new='1', visit_stats.uv,0)) new_uv_count,
         sum(visit_stats.uv) uv_count, sum(pv) pv_count, count( DISTINCT ip) ip_count from visit_stats
         where  account_no=#{accountNo} and code=#{code} and toYYYYMMDD(start_time)=#{startTime}
-        group by date_time_str ORDER BY date_time_str desc
+        group by date_time_str ORDER BY date_time_str asc
     </select>
 
 
@@ -86,7 +86,7 @@
         sum(visit_stats.uv) uv_count, sum(pv) pv_count, count( DISTINCT ip) ip_count from visit_stats
         where account_no=#{accountNo} and code=#{code} and toYYYYMMDDhhmmss(start_time) BETWEEN #{startTime}
         and #{endTime}
-        group by date_time_str ORDER BY date_time_str desc
+        group by date_time_str ORDER BY date_time_str asc
     </select>
 
 

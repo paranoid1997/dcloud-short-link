@@ -343,6 +343,12 @@ public class TrafficServiceImpl implements TrafficService {
     private TrafficVO beanProcess(TrafficDO trafficDO) {
         TrafficVO trafficVO = new TrafficVO();
         BeanUtils.copyProperties(trafficDO,trafficVO);
+        //惰性更新，前端显示的问题，根据更新时间进行判断是否需要显示最新的流量包
+        String todayStr = TimeUtil.format(new Date(),"yyyy-MM-dd");
+        String trafficUpdateStr = TimeUtil.format(trafficDO.getGmtModified(),"yyyy-MM-dd");
+        if(!todayStr.equalsIgnoreCase(trafficUpdateStr)){
+            trafficVO.setDayUsed(0);
+        }
         return trafficVO;
     }
 

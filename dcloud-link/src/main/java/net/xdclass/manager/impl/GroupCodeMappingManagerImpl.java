@@ -96,7 +96,8 @@ public class GroupCodeMappingManagerImpl implements GroupCodeMappingManager {
                 selectPage(pageInfo, new QueryWrapper<GroupCodeMappingDO>()
                         .eq("account_no", accountNo)
                 .eq("group_id", groupId)
-                .eq("del",0));
+                .eq("del",0)
+                        .orderByDesc("gmt_create"));
 
         Map<String, Object> pageMap = new HashMap<>(3);
 
